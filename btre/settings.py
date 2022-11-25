@@ -9,12 +9,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-xrndp&beg3o9(baaunk259v1c9m8tb3z4r1lwmc%kt%mi)*wm="
+SECRET_KEY = (
+    "django-insecure-xrndp&beg3o9(baaunk259v1c9m8tb3z4r1lwmc%kt%mi)*wm="
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -27,6 +29,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "pages.apps.PagesConfig",
+    "listings.apps.ListingsConfig",
+    "realtors.apps.RealtorsConfig",
 ]
 
 MIDDLEWARE = [
@@ -64,9 +68,13 @@ WSGI_APPLICATION = "btre.wsgi.application"
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'btredb',
+        'USER': 'btreuser',
+        'PASSWORD': '1234',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
@@ -107,9 +115,7 @@ USE_TZ = True
 
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 STATIC_URL = "static/"
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "btre/static")
-]
+STATICFILES_DIRS = [os.path.join(BASE_DIR, "btre/static")]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
